@@ -47,5 +47,5 @@ func HelmPath() string {
 }
 
 func KubernetesInstallPath() string {
-	return filepath.Join("opt", "k8s", "install")
+	return filepath.Join("opt", "rke2-artifacts")
 }

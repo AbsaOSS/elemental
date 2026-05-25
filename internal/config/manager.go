@@ -128,7 +128,7 @@ func (m *Manager) ConfigureComponents(ctx context.Context, conf *image.Configura
 		return nil, fmt.Errorf("configuring custom scripts: %w", err)
 	}
 
-	k8sScript, k8sConfScript, err := m.configureKubernetes(ctx, conf, rm, output)
+	_, _, err = m.configureKubernetes(ctx, conf, rm, output)
 	if err != nil {
 		return nil, fmt.Errorf("configuring kubernetes: %w", err)
 	}
@@ -144,9 +144,11 @@ func (m *Manager) ConfigureComponents(ctx context.Context, conf *image.Configura
 		}
 	}
 
-	if err = m.configureIgnition(conf, output, k8sScript, k8sConfScript, extensions); err != nil {
-		return nil, fmt.Errorf("configuring ignition: %w", err)
-	}
+	// don't transpile Ignition as it blocks capi injected
+	// Until figured how to merge both at deploy stage, comment out
+	//if err = m.configureIgnition(conf, output, k8sScript, k8sConfScript, extensions); err != nil {
+	//	return nil, fmt.Errorf("configuring ignition: %w", err)
+	//}
 
 	return rm, nil
 }

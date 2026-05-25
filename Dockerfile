@@ -50,7 +50,7 @@ ENTRYPOINT ["/usr/bin/elemental3ctl"]
 FROM runner-base AS runner-elemental3
 
 RUN zypper --non-interactive removerepo repo-update || true; \
-    zypper --non-interactive install --no-recommends xorriso && \
+    zypper --non-interactive install --no-recommends xorriso qemu-img && \
     zypper clean --all
 
 ENTRYPOINT ["/usr/bin/elemental3"]
