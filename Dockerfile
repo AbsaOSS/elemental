@@ -15,7 +15,6 @@ ADD cmd cmd
 ADD internal internal
 ADD pkg pkg
 ADD Makefile .
-ADD .git .
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH make all
 
 FROM registry.opensuse.org/opensuse/tumbleweed:latest AS runner-base
